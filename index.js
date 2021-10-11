@@ -3,16 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
   let urlsExist = false;
 
   const createURL = (categories, pages, formatType, monthYear) => {
-    console.log(monthYear.value)
     let month = monthYear.value.slice(5);
     if (month[0] === '0') {
       month = month[1];
     } 
     const year = monthYear.value.slice(0, -3)
-    console.log(month, year)
     let link = ''
     categories.forEach( el => {
+    if (el === '3A618073011'){
+      return;
+    } else if (el === 'nonfiction'){
+        link = `https://www.amazon.com/s?i=digital-text&rh=n%3A157325011%2Cp_20%3AEnglish&s=salesrank&page=2&Adv-Srch-Books-Submit.x=30&Adv-Srch-Books-Submit.y=13&field-datemod=${month}&field-dateop=During&field-dateyear=${year}&unfiltered=1`
+    } else {
       link = `https://www.amazon.com/s?i=stripbooks&rh=n%${el}%2Cp_n_feature_browse-bin%${formatType}%2Cp_20%3AEnglish&s=salesrank&page=1&Adv-Srch-Books-Submit.&Adv-Srch-Books-Submit.&field-datemod=${month}&field-dateop=During&field-dateyear=${year}&unfiltered=1`
+    }
       appendLinks(link, pages)
     })
     
@@ -46,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
           values.push(radios[i].value)
         }
+        console.log(values)
       } 
     }
     if (!urlsExist){
